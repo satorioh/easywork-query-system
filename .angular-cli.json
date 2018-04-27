@@ -25,7 +25,8 @@
         "assets/bower_components/Ionicons/css/ionicons.min.css",
         "assets/bower_components/jvectormap/jquery-jvectormap.css",
         "assets/dist/css/AdminLTE.min.css",
-        "assets/dist/css/skins/_all-skins.min.css"
+        "assets/dist/css/skins/_all-skins.min.css",
+        "assets/bower_components/bootstrap-daterangepicker/daterangepicker.css"
       ],
       "scripts": [
         "assets/bower_components/jquery/dist/jquery.min.js",

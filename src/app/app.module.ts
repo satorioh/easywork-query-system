@@ -7,6 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
+import { DatePickerComponent } from './date-picker/date-picker.component';
+import { TableComponent } from './table/table.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { FooterComponent } from './footer/footer.component';
     HeaderComponent,
     MenuComponent,
     ContentComponent,
-    FooterComponent
+    FooterComponent,
+    DatePickerComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule
