@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import * as $ from 'jquery';
 import 'bootstrap-daterangepicker';
+import {Http} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx';
+import {RecordService} from '../services/record.service';
 
 @Component({
   selector: 'app-date-picker',
@@ -9,13 +13,23 @@ import 'bootstrap-daterangepicker';
 })
 export class DatePickerComponent implements OnInit {
 
-  constructor() {
+  data: Observable<any>;
+  records = [];
+  startDate: string;
+  endDate: string;
+  hasRangeSelected = true;
+
+  constructor(
+    public http: Http,
+    public recordService: RecordService
+  ) {
+
   }
 
   ngOnInit() {
     $('#reservation').daterangepicker({
       'locale': {
-        'format': 'MM/DD/YYYY',
+        'format': 'YYYY/MM/DD',
         'separator': ' - ',
         'applyLabel': '确定',
         'cancelLabel': '取消',
@@ -47,8 +61,24 @@ export class DatePickerComponent implements OnInit {
           '十二月'
         ],
         'firstDay': 1
-        }
-      });
+      }
+    }, (start, end, label) => {
+      console.log(start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      this.startDate = start.format('YYYY-MM-DD');
+      this.endDate = end.format('YYYY-MM-DD');
+      this.hasRangeSelected = true;
+    });
   }
 
+  query() {
+    if (!this.startDate || !this.endDate) {
+      this.hasRangeSelected = false;
+    } else {
+      this.data = this.http.get(`/api/queryData.php?startDate=${this.startDate}&endDate=${this.endDate}`).map(response => response.json());
+      this.data.subscribe(data => {
+        this.recordService.setRecord(data);
+        console.log(this.recordService.getRecord());
+      });
+    }
+  }
 }

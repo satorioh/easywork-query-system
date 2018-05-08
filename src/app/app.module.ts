@@ -9,6 +9,9 @@ import { ContentComponent } from './content/content.component';
 import { FooterComponent } from './footer/footer.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
 import { TableComponent } from './table/table.component';
+import { HttpModule } from '@angular/http';
+import {RecordService} from './services/record.service';
+import { PaginationComponent } from './pagination/pagination.component';
 
 
 @NgModule({
@@ -19,12 +22,14 @@ import { TableComponent } from './table/table.component';
     ContentComponent,
     FooterComponent,
     DatePickerComponent,
-    TableComponent
+    TableComponent,
+    PaginationComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [RecordService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,12 +1,13 @@
 <!-- Date range -->
 <div class="form-group">
   <label>选择日期:</label>
-      <div class="input-group">
+      <div class="input-group" [class.has-error]="!hasRangeSelected">
         <input type="text" class="form-control" id="reservation">
         <span class="input-group-btn">
-          <button type="button" class="btn btn-success ">查询</button>
+          <button type="button" class="btn btn-success" (click)="query()">查询</button>
         </span>
       </div>
+      <span [hidden]="hasRangeSelected" style="color: red;">请选择一个日期范围</span>
       <!-- /.input group -->
 </div>
 <!-- /.form group -->
