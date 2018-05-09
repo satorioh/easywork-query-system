@@ -1,0 +1,30 @@
+.login-page {
+  background: #444;
+}
+
+.login-box-body {
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  height: 375px;
+  width: 440px;
+  padding: 35px 40px 50px;
+  border-radius: 4px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+input {
+  border-radius: 3px;
+  height: 40px;
+}
+
+a.forget-pwd {
+  position: absolute;
+  bottom: 20px;
+  right: 40px;
+}

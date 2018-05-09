@@ -6,25 +6,25 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./pagination.component.css']
 })
 export class PaginationComponent implements OnInit {
-  @Input() page: number;
-  @Input() total: number;
-  @Input() perPage: number;
-  @Input() pagesToShow: number;
+  @Input() page: number; // 传入用户点击的页数
+  @Input() total: number; // 数据总个数
+  @Input() perPage: number; // 每页展示的数据个数
+  @Input() pagesToShow: number; // 需要显示的分页个数
 
-  @Output() goPrev = new EventEmitter<boolean>();
-  @Output() goNext = new EventEmitter<boolean>();
+  @Output() goPrev = new EventEmitter();
+  @Output() goNext = new EventEmitter();
   @Output() goPage = new EventEmitter<number>();
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  // 当前页的最小编号
   getMin(): number {
     return ((this.perPage * this.page) - this.perPage) + 1;
   }
 
+  // 当前页的最大编号
   getMax(): number {
     let max = this.perPage * this.page;
     if (max > this.total) {
@@ -38,11 +38,11 @@ export class PaginationComponent implements OnInit {
   }
 
   onPrev(): void {
-    this.goPrev.emit(true);
+    this.goPrev.emit();
   }
 
-  onNext(next: boolean): void {
-    this.goNext.emit(next);
+  onNext(): void {
+    this.goNext.emit();
   }
 
   totalPages(): number {

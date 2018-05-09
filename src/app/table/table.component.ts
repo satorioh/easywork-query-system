@@ -44,11 +44,17 @@ export class TableComponent implements OnInit {
   }
 
   onNext(): void {
+    if (this.page === Math.ceil(this.total / this.limit)) {
+      return;
+    }
     this.page++;
     this.getRecordsGroup();
   }
 
   onPrev(): void {
+    if (this.page === 1) {
+      return;
+    }
     this.page--;
     this.getRecordsGroup();
   }
