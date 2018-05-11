@@ -18,10 +18,11 @@ import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuardService} from './services/auth-guard.service';
+import {HttpClientModule} from '@angular/common/http';
 
 const routes: Routes = [
-  // {path: '', component: MainComponent, canActivate:[AuthGuardService]},
-  {path: '', component: MainComponent},
+  {path: '', component: MainComponent, canActivate:[AuthGuardService]},
+  // {path: '', component: MainComponent},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo: ''}
 ];

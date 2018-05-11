@@ -8,7 +8,7 @@ export class AuthService {
   constructor(private http: Http) {
   }
 
-  login(uid: string, password: string) {
-    return this.http.post('/api/authentication.php', {uid, password}).map(response => response.json());
+  login(uwid: string, upwd: string) {
+    return this.http.post('https://roubintech.com/backend/authentication.php', {uwid, upwd}).map(response => response.json());
   }
 }

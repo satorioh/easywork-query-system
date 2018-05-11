@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     console.log(this.formModel.value);
     const uid = this.formModel.value.uwid;
     const password = this.formModel.value.upwd;
-    this.authService.login(uid, password).subscribe(data => this.setSession(data));
+    this.authService.login(uid, password).subscribe(data => console.log(data));
   }
 
   setSession(data){
