@@ -11,11 +11,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   formModel: FormGroup;
   returnUrl: string;
-  constructor(
-    private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
+
+  constructor(private authService: AuthService,
+              private route: ActivatedRoute,
+              private router: Router,) {
   }
 
   ngOnInit() {
@@ -31,11 +30,15 @@ export class LoginComponent implements OnInit {
     console.log(this.formModel.value);
     const uid = this.formModel.value.uwid;
     const password = this.formModel.value.upwd;
-    this.authService.login(uid, password).subscribe(data => console.log(data));
+    this.authService.login(uid, password).subscribe(data => this.setSession(data));
   }
 
-  setSession(data){
-    localStorage.setItem('id_token', data);
-    this.router.navigate([this.returnUrl]);
+  setSession(data) {
+    console.log(new Date(data.issuedAt * 1000));
+    console.log(new Date(data.expiresAt * 1000));
+    const expiresAt = data.expiresAt * 1000;
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('expires_at', JSON.stringify(expiresAt));
+    // this.router.navigate([this.returnUrl]);
   }
 }

@@ -9,6 +9,10 @@ export class AuthService {
   }
 
   login(uwid: string, upwd: string) {
-    return this.http.post('https://roubintech.com/backend/authentication.php', {uwid, upwd}).map(response => response.json());
+    const postData = new FormData();
+    postData.append('uwid' , uwid);
+    postData.append('upwd' , upwd);
+    return this.http.post('https://roubintech.com/backend/authentication.php', postData)
+      .map(response => response.json());
   }
 }
