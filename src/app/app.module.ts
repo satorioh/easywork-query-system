@@ -11,18 +11,17 @@ import {ContentComponent} from './content/content.component';
 import {FooterComponent} from './footer/footer.component';
 import {DatePickerComponent} from './date-picker/date-picker.component';
 import {TableComponent} from './table/table.component';
-import {HttpModule} from '@angular/http';
 import {RecordService} from './services/record.service';
 import {PaginationComponent} from './pagination/pagination.component';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuardService} from './services/auth-guard.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {TokenInterceptorService} from './services/token-interceptor.service';
 
 const routes: Routes = [
   {path: '', component: MainComponent, canActivate:[AuthGuardService]},
-  // {path: '', component: MainComponent},
   {path: 'login', component: LoginComponent},
   {path: '**', redirectTo: ''}
 ];
@@ -42,12 +41,21 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [RecordService, AuthService, AuthGuardService],
+  providers: [
+    RecordService,
+    AuthService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

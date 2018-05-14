@@ -11,6 +11,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class LoginComponent implements OnInit {
   formModel: FormGroup;
   returnUrl: string;
+  loginErrInfo = false;
 
   constructor(private authService: AuthService,
               private route: ActivatedRoute,
@@ -30,15 +31,23 @@ export class LoginComponent implements OnInit {
     console.log(this.formModel.value);
     const uid = this.formModel.value.uwid;
     const password = this.formModel.value.upwd;
-    this.authService.login(uid, password).subscribe(data => this.setSession(data));
+    this.authService.login(uid, password).subscribe(data => {
+      console.log(data);
+      if (data['result'] === 1) {
+        this.loginErrInfo = false;
+        this.setSession(data);
+      } else {
+        this.loginErrInfo = true;
+      }
+    });
   }
 
   setSession(data) {
-    console.log(new Date(data.issuedAt * 1000));
-    console.log(new Date(data.expiresAt * 1000));
-    const expiresAt = data.expiresAt * 1000;
+    // console.log(new Date(data.issuedAt * 1000));
+    // console.log(new Date(data.expiresAt * 1000));
+    // const expiresAt = data.expiresAt * 1000;
     localStorage.setItem('token', data.token);
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt));
-    // this.router.navigate([this.returnUrl]);
+    // localStorage.setItem('expires_at', JSON.stringify(expiresAt));
+    this.router.navigate([this.returnUrl]);
   }
 }

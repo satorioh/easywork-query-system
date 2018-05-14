@@ -17,6 +17,7 @@
       <div class="row">
         <!-- /.col -->
         <div class="col-sm-12">
+          <span class="has-error" style="color:red;" *ngIf="loginErrInfo">用户名或密码错误！</span>
           <button type="submit" class="btn btn-lg btn-primary btn-block" (click)="login()" [disabled]="formModel.get('uwid').touched && formModel.get('upwd').touched && formModel.invalid">登 录</button>
         </div>
         <!-- /.col -->
