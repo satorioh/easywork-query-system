@@ -16,7 +16,9 @@ export class AuthService {
       // .map(response => response.json());
   }
 
-  validate(){
-    return this.http.get('https://roubintech.com/backend/authentication.php');
+  validate(uwid: string){
+    const postData = new FormData();
+    postData.append('uwid' , uwid);
+    return this.http.post('https://roubintech.com/backend/validation.php', postData);
   }
 }

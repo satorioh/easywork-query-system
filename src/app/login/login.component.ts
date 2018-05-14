@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
     // console.log(new Date(data.expiresAt * 1000));
     // const expiresAt = data.expiresAt * 1000;
     localStorage.setItem('token', data.token);
+    localStorage.setItem('uwid', data.uwid);
     // localStorage.setItem('expires_at', JSON.stringify(expiresAt));
     this.router.navigate([this.returnUrl]);
   }
