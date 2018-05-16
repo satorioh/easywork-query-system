@@ -21,6 +21,7 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
   $sql = "select * from asus_user where uwid='$uwid' and upwd='$upwd'";
   $result = mysqli_query($link,$sql);
   $list = mysqli_fetch_assoc($result);
+  $uename = $list['uename'];
 
   if($list){
   $signer = new Sha256();
@@ -31,7 +32,7 @@ use Lcobucci\JWT\Signer\Hmac\Sha256;
         ->setExpiration(time() + 3600)
         ->sign($signer, 'bea73dc38cb94b4c910a9e87059909ca')
         ->getToken();
-        echo json_encode(['result' => 1, 'message' => 'Token generated successfully', 'uwid' => $uwid, 'token' => '' . $token]);
+        echo json_encode(['result' => 1, 'message' => 'Token generated successfully', 'uwid' => $uwid, 'uename' => $uename, 'token' => '' . $token]);
           } else {
             echo json_encode(['result' => 0, 'message' => 'Invalid username and/or password']);
           }

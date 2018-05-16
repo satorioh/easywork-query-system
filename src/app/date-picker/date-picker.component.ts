@@ -19,6 +19,7 @@ export class DatePickerComponent implements OnInit {
   startDate: string;
   endDate: string;
   hasRangeSelected = true;
+  uwid: string;
 
   constructor(
     public http: HttpClient,
@@ -68,6 +69,7 @@ export class DatePickerComponent implements OnInit {
       this.startDate = start.format('YYYY-MM-DD');
       this.endDate = end.format('YYYY-MM-DD');
       this.hasRangeSelected = true;
+      this.uwid = localStorage.getItem('uwid');
     });
   }
 
@@ -75,10 +77,9 @@ export class DatePickerComponent implements OnInit {
     if (!this.startDate || !this.endDate) {
       this.hasRangeSelected = false;
     } else {
-      this.data = this.http.get(`https://roubintech.com/backend/queryData.php?startDate=${this.startDate}&endDate=${this.endDate}`);
+      this.data = this.http.get(`https://roubintech.com/backend/queryData.php?startDate=${this.startDate}&endDate=${this.endDate}&uwid=${this.uwid}`);
       this.data.subscribe(data => {
         this.recordService.setRecord(data);
-        console.log(this.recordService.getRecord());
       });
     }
   }
