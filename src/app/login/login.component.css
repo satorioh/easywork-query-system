@@ -28,3 +28,11 @@ a.forget-pwd {
   bottom: 20px;
   right: 40px;
 }
+
+@media screen and (max-width: 640px) {
+  .login-box-body {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+}
