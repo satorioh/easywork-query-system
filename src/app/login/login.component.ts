@@ -12,7 +12,7 @@ import {Md5} from 'ts-md5/dist/md5';
 export class LoginComponent implements OnInit {
   formModel: FormGroup;
   returnUrl: string;
-  loginErrInfo = false;
+  loginErrInfo = '';
 
   constructor(private authService: AuthService,
               private route: ActivatedRoute,
@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(uid, password).subscribe(data => {
       console.log(data);
       if (data['result'] === 1) {
-        this.loginErrInfo = false;
+        this.loginErrInfo = '';
         this.setSession(data);
       } else {
-        this.loginErrInfo = true;
+        this.loginErrInfo = data['message'];
       }
     });
   }
@@ -48,5 +48,9 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('uwid', data.uwid);
     localStorage.setItem('uename', data.uename);
     this.router.navigate([this.returnUrl]);
+  }
+
+  goToSignup(){
+    this.router.navigate(['/signup']);
   }
 }

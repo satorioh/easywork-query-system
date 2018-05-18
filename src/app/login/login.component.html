@@ -17,14 +17,14 @@
       <div class="row">
         <!-- /.col -->
         <div class="col-sm-12">
-          <span class="has-error" style="color:red;" *ngIf="loginErrInfo">用户名或密码错误！</span>
+          <span class="has-error" style="color:red;">{{loginErrInfo}}</span>
           <button type="submit" class="btn btn-lg btn-primary btn-block" (click)="login()" [disabled]="formModel.get('uwid').touched && formModel.get('upwd').touched && formModel.invalid">登 录</button>
         </div>
         <!-- /.col -->
       </div>
     </form>
 
-    <a href="#" class="forget-pwd">忘记密码>></a><br>
+    <span class="sign-option"><a href="javascript:void(0)" class="sign-up" (click)="goToSignup()">注册 | </a><a href="javascript:void(0)" class="forget-pwd">忘记密码</a></span>
   </div>
   <!-- /.login-box-body -->
 </div>

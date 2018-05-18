@@ -19,10 +19,12 @@ import {AuthService} from './services/auth.service';
 import {AuthGuardService} from './services/auth-guard.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptorService} from './services/token-interceptor.service';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {path: '', component: MainComponent, canActivate:[AuthGuardService]},
   {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
   {path: '**', redirectTo: ''}
 ];
 
@@ -37,7 +39,8 @@ const routes: Routes = [
     TableComponent,
     PaginationComponent,
     LoginComponent,
-    MainComponent
+    MainComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
