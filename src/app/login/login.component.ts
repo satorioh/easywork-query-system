@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     const fb = new FormBuilder;
     this.formModel = fb.group({
-      uwid: ['AH1100288', [Validators.required]],
-      upwd: ['#*c1234', [Validators.required]]
+      uwid: ['', [Validators.required]],
+      upwd: ['', [Validators.required]]
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.authService.logout();
