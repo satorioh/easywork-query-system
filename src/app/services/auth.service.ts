@@ -8,20 +8,24 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  login(uwid: string, upwd: any) {
+  auth(method: string, uwid: string, upwd: any) {
     const postData = new FormData();
-    postData.append('uwid' , uwid);
-    postData.append('upwd' , upwd);
-    return this.http.post('https://roubintech.com/backend/authentication.php', postData);
+    postData.append('uwid', uwid);
+    postData.append('upwd', upwd);
+    switch (method) {
+      case 'login': {
+        return this.http.post('https://easywork.asus.com.cn/backend/authentication.php', postData);
+      }
+      case 'signup': {
+        return this.http.post('https://easywork.asus.com.cn/backend/signup.php', postData);
+      }
+      case 'validate': {
+        return this.http.post('https://easywork.asus.com.cn/backend/validation.php', postData);
+      }
+    }
   }
 
-  validate(uwid: string){
-    const postData = new FormData();
-    postData.append('uwid' , uwid);
-    return this.http.post('https://roubintech.com/backend/validation.php', postData);
-  }
-
-  logout(){
+  logout() {
     localStorage.clear();
   }
 }

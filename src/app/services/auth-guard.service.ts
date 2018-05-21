@@ -14,9 +14,9 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     if (localStorage.getItem('token')) {
       const uwid = localStorage.getItem('uwid');
-      return this.authService.validate(uwid).map(data => {
+      return this.authService.auth('validate', uwid, '').map(data => {
         console.log(data);
-        if(data['result']) return true;
+        if (data['result']) return true;
         this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
         return false;
       });

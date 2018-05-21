@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     const fb = new FormBuilder;
     this.formModel = fb.group({
-      uwid: ['', [Validators.required]],
-      upwd: ['', [Validators.required]]
+      uwid: ['AH1100288', [Validators.required]],
+      upwd: ['#*c1234', [Validators.required]]
     });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.authService.logout();
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   login() {
     const uid = this.formModel.value.uwid;
     const password = Md5.hashStr(this.formModel.value.upwd);
-    this.authService.login(uid, password).subscribe(data => {
+    this.authService.auth('login', uid, password).subscribe(data => {
       console.log(data);
       if (data['result'] === 1) {
         this.loginErrInfo = '';
@@ -50,7 +50,11 @@ export class LoginComponent implements OnInit {
     this.router.navigate([this.returnUrl]);
   }
 
-  goToSignup(){
+  goToSignup() {
     this.router.navigate(['/signup']);
+  }
+
+  forgetPwd() {
+    alert('请联系Robin1_Wang(42055)');
   }
 }

@@ -77,7 +77,7 @@ export class DatePickerComponent implements OnInit {
     if (!this.startDate || !this.endDate) {
       this.hasRangeSelected = false;
     } else {
-      this.data = this.http.get(`https://roubintech.com/backend/queryData.php?startDate=${this.startDate}&endDate=${this.endDate}&uwid=${this.uwid}`);
+      this.data = this.http.get(`https://easywork.asus.com.cn/backend/queryData.php?startDate=${this.startDate}&endDate=${this.endDate}&uwid=${this.uwid}`);
       this.data.subscribe(data => {
         this.recordService.setRecord(data);
       });

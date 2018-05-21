@@ -15,9 +15,10 @@
         <!-- 密码组 -->
         <div formGroupName="upwdGroup" class="form-group" [class.has-error]="formModel.get('upwdGroup.upwd').touched && formModel.get('upwdGroup.upwdConfirm').touched && formModel.hasError('upwdConfirmResult','upwdGroup')">
           <!-- 密码组1 -->
-          <div class="form-group" [class.has-error]="formModel.get('upwdGroup.upwd').touched && formModel.hasError('required','upwdGroup.upwd')">
+          <div class="form-group" [class.has-error]="formModel.get('upwdGroup.upwd').touched && formModel.hasError('required','upwdGroup.upwd') || formModel.get('upwdGroup.upwd').touched && formModel.hasError('minlength','upwdGroup.upwd')">
             <input formControlName="upwd" type="password" class="form-control" placeholder="请输入密码">
             <span class="help-block" [class.hidden]="formModel.get('upwdGroup.upwd').untouched || !formModel.hasError('required','upwdGroup.upwd')">请输入密码</span>
+            <span class="help-block" [class.hidden]="formModel.get('upwdGroup.upwd').untouched || !formModel.hasError('minlength','upwdGroup.upwd')">密码最少6位</span>
           </div>
           <!-- 密码组1结束 -->
           <!-- 密码组2 -->
@@ -30,6 +31,7 @@
         <div class="row">
           <!-- /.col -->
           <div class="col-sm-12">
+            <span class="has-error" style="color:red;">{{signupErrInfo}}</span>
             <button type="submit" class="btn btn-lg btn-primary btn-block" (click)="signup()" [disabled]="formModel.get('uwid').touched && formModel.get('upwdGroup.upwd').touched && formModel.get('upwdGroup.upwdConfirm').touched && formModel.invalid">
               注 册
             </button>
@@ -37,6 +39,7 @@
           <!-- /.col -->
         </div>
       </form>
+      <span class="sign-option"><a href="javascript:void(0)" class="login" (click)="goToLogin()">登录 | </a><a href="javascript:void(0)" class="forget-pwd" (click)="forgetPwd()">忘记密码</a></span>
     </div>
     <!-- /.login-box-body -->
   </div>
